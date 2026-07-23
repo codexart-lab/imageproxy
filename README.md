@@ -1,5 +1,7 @@
 # Cloudflare Image Proxy
-
+<p align="center">
+  <img src="assets/banner.png" alt="Cloudflare Image Proxy Banner" width="100%" />
+</p>
 A production-ready, enterprise-grade image proxy built with Cloudflare Workers and TypeScript. Features image transformations, edge caching, rate limiting, and comprehensive SSRF protection.
 
 ## ✨ Features
