@@ -1,0 +1,33 @@
+{
+  "name": "cf-image-proxy",
+  "main": "src/index.ts",
+  "compatibility_date": "2024-06-20",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+  "rules": [
+    {
+      "type": "ESModule",
+      "globs": ["**/*.ts", "**/*.js"],
+      "fallthrough": true
+    }
+  ],
+  "env": {
+    "production": {
+      "vars": {
+        "RATE_LIMIT_MAX_REQUESTS": "100",
+        "RATE_LIMIT_WINDOW_MS": "60000",
+        "MAX_URL_LENGTH": "2048",
+        "REQUEST_TIMEOUT_MS": "30000"
+      }
+    }
+  },
+  "vars": {
+    "RATE_LIMIT_MAX_REQUESTS": "100",
+    "RATE_LIMIT_WINDOW_MS": "60000",
+    "MAX_URL_LENGTH": "2048",
+    "REQUEST_TIMEOUT_MS": "30000"
+  }
+}
