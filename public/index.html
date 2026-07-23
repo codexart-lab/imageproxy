@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloudflare Image Proxy</title>
+    <link rel="stylesheet" href="/style.css">
+    <meta name="description" content="Production-ready Cloudflare Image Proxy with transformations and optimization">
+</head>
+<body>
+    <div class="gradient-bg"></div>
+    <div class="noise-overlay"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="8" fill="url(#gradient)"/>
+                    <path d="M20 10L25 20H15L20 10Z" fill="white"/>
+                    <rect x="12" y="22" width="16" height="8" rx="2" fill="white"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF6B6B"/>
+                            <stop offset="1" stop-color="#4ECDC4"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>Image Proxy</h1>
+            </div>
+            <p class="tagline">Enterprise-grade image transformation at the edge</p>
+        </header>
+
+        <main class="main-content">
+            <div class="glass-card">
+                <div class="input-section">
+                    <label for="imageUrl" class="input-label">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                        Image URL
+                    </label>
+                    <input 
+                        type="url" 
+                        id="imageUrl" 
+                        placeholder="https://example.com/image.jpg" 
+                        class="input-field"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div class="transform-grid">
+                    <div class="transform-group">
+                        <label class="transform-label">Dimensions</label>
+                        <div class="dimension-inputs">
+                            <div class="input-wrapper">
+                                <input type="number" id="width" placeholder="W" min="1" max="10000" class="number-input">
+                                <span class="input-suffix">px</span>
+                            </div>
+                            <span class="separator">×</span>
+                            <div class="input-wrapper">
+                                <input type="number" id="height" placeholder="H" min="1" max="10000" class="number-input">
+                                <span class="input-suffix">px</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="transform-group">
+                        <label for="quality" class="transform-label">Quality</label>
+                        <div class="slider-container">
+                            <input type="range" id="quality" min="1" max="100" value="90" class="slider">
+                            <span id="qualityValue" class="slider-value">90%</span>
+                        </div>
+                    </div>
+
+                    <div class="transform-group">
+                        <label for="format" class="transform-label">Format</label>
+                        <select id="format" class="select-input">
+                            <option value="">Auto</option>
+                            <option value="webp">WebP</option>
+                            <option value="avif">AVIF</option>
+                            <option value="jpeg">JPEG</option>
+                            <option value="png">PNG</option>
+                        </select>
+                    </div>
+
+                    <div class="transform-group">
+                        <label for="fit" class="transform-label">Fit Mode</label>
+                        <select id="fit" class="select-input">
+                            <option value="">Default</option>
+                            <option value="scale-down">Scale Down</option>
+                            <option value="contain">Contain</option>
+                            <option value="cover">Cover</option>
+                            <option value="crop">Crop</option>
+                            <option value="pad">Pad</option>
+                        </select>
+                    </div>
+
+                    <div class="transform-group">
+                        <label for="gravity" class="transform-label">Gravity</label>
+                        <select id="gravity" class="select-input">
+                            <option value="">Center</option>
+                            <option value="left">Left</option>
+                            <option value="right">Right</option>
+                            <option value="top">Top</option>
+                            <option value="bottom">Bottom</option>
+                            <option value="auto">Auto</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="advanced-toggle" id="advancedToggle">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                    <span>Advanced Options</span>
+                </div>
+
+                <div class="advanced-options" id="advancedOptions" style="display: none;">
+                    <div class="transform-grid">
+                        <div class="transform-group">
+                            <label for="blur" class="transform-label">Blur</label>
+                            <div class="slider-container">
+                                <input type="range" id="blur" min="0" max="100" value="0" class="slider">
+                                <span id="blurValue" class="slider-value">0</span>
+                            </div>
+                        </div>
+
+                        <div class="transform-group">
+                            <label for="brightness" class="transform-label">Brightness</label>
+                            <div class="slider-container">
+                                <input type="range" id="brightness" min="-100" max="100" value="0" class="slider">
+                                <span id="brightnessValue" class="slider-value">0</span>
+                            </div>
+                        </div>
+
+                        <div class="transform-group">
+                            <label for="contrast" class="transform-label">Contrast</label>
+                            <div class="slider-container">
+                                <input type="range" id="contrast" min="-100" max="100" value="0" class="slider">
+                                <span id="contrastValue" class="slider-value">0</span>
+                            </div>
+                        </div>
+
+                        <div class="transform-group">
+                            <label for="sharpen" class="transform-label">Sharpen</label>
+                            <div class="slider-container">
+                                <input type="range" id="sharpen" min="0" max="100" value="0" class="slider">
+                                <span id="sharpenValue" class="slider-value">0</span>
+                            </div>
+                        </div>
+
+                        <div class="transform-group">
+                            <label for="rotate" class="transform-label">Rotate</label>
+                            <select id="rotate" class="select-input">
+                                <option value="">0°</option>
+                                <option value="90">90°</option>
+                                <option value="180">180°</option>
+                                <option value="270">270°</option>
+                            </select>
+                        </div>
+
+                        <div class="transform-group">
+                            <label for="dpr" class="transform-label">DPR</label>
+                            <select id="dpr" class="select-input">
+                                <option value="">Auto</option>
+                                <option value="1">1x</option>
+                                <option value="2">2x</option>
+                                <option value="3">3x</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="generateBtn" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                        Generate URL
+                    </button>
+                    <button id="resetBtn" class="btn btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="1 4 1 10 7 10"></polyline>
+                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                        </svg>
+                        Reset
+                    </button>
+                </div>
+            </div>
+
+            <div id="resultSection" class="result-section" style="display: none;">
+                <div class="glass-card">
+                    <div class="result-header">
+                        <h3>Generated URL</h3>
+                        <div class="result-actions">
+                            <button id="copyUrlBtn" class="btn-icon" title="Copy URL">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                            <button id="downloadBtn" class="btn-icon" title="Download">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="url-display" id="generatedUrl"></div>
+                    
+                    <div class="preview-section">
+                        <h4>Preview</h4>
+                        <div class="preview-container">
+                            <div class="preview-loader" id="previewLoader" style="display: none;">
+                                <div class="loader"></div>
+                            </div>
+                            <img id="previewImage" class="preview-image" alt="Preview">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="historySection" class="history-section">
+                <div class="glass-card">
+                    <div class="history-header">
+                        <h3>Recent Images</h3>
+                        <button id="clearHistoryBtn" class="btn-text">Clear History</button>
+                    </div>
+                    <div id="historyList" class="history-list"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Powered by Cloudflare Workers</p>
+            <div class="shortcuts-info">
+                <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to generate
+            </div>
+        </footer>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
